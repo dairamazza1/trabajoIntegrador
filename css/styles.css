@@ -1,0 +1,105 @@
+body{
+  background-image: url("../image/mountain.jpg");
+  background-size: cover;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+a:-webkit-any-link {
+    color: white;
+    z-index: 100;
+}
+a:not([href]):not([tabindex]){
+  color: white;
+}
+.ml-auto, .mx-auto {
+    margin-top: 170px;
+}
+.card-title {
+    color: white;
+}
+
+
+.input-group-text{
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.card.bg-primary, .card .card-header-primary, .card.card-rotate.bg-primary .back, .card.card-rotate.bg-primary .front {
+    background: linear-gradient(60deg,#c58a7d,#f1957e);
+}
+.card-login .card-header {
+    margin: -40px 20px 15px;
+    padding: 20px 0;
+}
+.card .card-header-primary {
+  box-shadow: 0 5px 20px 0 rgba(0,0,0,.2), 0 13px 24px -11px rgba(176, 39, 39, 0.39);
+}
+.card-login .card-body {
+    padding: 0 30px 0 10px;
+}
+
+footer{
+  padding: .75rem 1.25rem;
+}
+
+.pb-3, .py-3 {
+    padding-top: 1rem;
+    padding-bottom: 1rem!important;
+}
+
+.form-control, .is-focused .form-control {
+    background-image: linear-gradient(0deg,#9c27b0 2px,rgba(156,39,176,0) 0),linear-gradient(0deg,#d2d2d2 1px,hsla(0,0%,82%,0) 0);
+}
+
+.form-control{
+     background: no-repeat bottom,50% calc(100% - 1px);
+     background-size: 0 100%,100% 100%;
+     border: 0;
+     height: 36px;
+     transition: background 0s ease-out;
+     padding-left: 0;
+     padding-right: 0;
+     border-radius: 0;
+     font-size: 14px;
+}
+a:-webkit-any-link {
+    color: white;
+    z-index: 10;
+}
+
+a nav-link{
+  color:white;
+}
+.navbar-nav{
+  color: white;
+
+}
+.nav{
+  color: white;
+}
+.nav-link{
+  color: white;
+}
