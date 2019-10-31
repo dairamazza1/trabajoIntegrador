@@ -1,14 +1,43 @@
 <?php
 
-$username="asdasd";
+$username="";
 $password="";
 
 $nombreVacioError = false;
 $contraseniaVaciaError= false;
+$script=basename(__FILE__);
+//ARRAY DE USUARIOS GUARDADOS
+$usuarios = [];
+
+if(isset($_POST["submit"])) {
+  if (empty($_POST["username"])){
+    $usuarioVacioError = true;
+  } else {
+    $username=$_POST["username"];
+  }
+  
+  if (empty($_POST["password"])){
+    $contraseniaVaciaError= true;
+  } else {
+    $password=$_POST["password"];
+  }
+
+  if (file_exists("usuarios.json")) {
+    $usuariosJson=file_get_contents('usuarios.json');   //lee el archivo y lo trae como un texto... pero necesitamos un array para guardar todos los usuarios ya levantados
+    $usuarios=json_decode($usuariosJson,true); //con json_decode lo pasamos a AARAY al texto
+
+    //ver todos los usuarios para vr que nombre tienen asi no se repiten.
+    foreach ($usuarios as $us) {
+      if ($us["username"] == $username) {  //para cada usuario se ve que no tengan el mismo nombre que le pase previamente
+        $usuarioVacioError=true;
+        //echo "El nombre de usuario ya existe";
+        break;//recorre el array hastaque encuentra el usuario
+      }
+    }
+  }
 
 
-
-
+//ANALIZA EL CONTENIDO DEL REGISTER
 
 $archivo='usuarios.json';
 if(file_exists($archivo)){
@@ -17,11 +46,12 @@ if(file_exists($archivo)){
   $usuarioExiste=false; //declaro que es falso y si existe se convierte en verdadero
 
   foreach ($usuarios as $usuario) {//recorre el array con todos los usuarios
-   if($usuario['username']==$username){ //el nombre del usuario es igual al que paso en el formulario?.. Sino lo es, tiene que pasar al siguinte usuario
+    if($usuario['username']==$username){ //el nombre del usuario es igual al que paso en el formulario?.. Sino lo es, tiene que pasar al siguinte usuario
      $usuarioExiste=true;
-     $contraseniaEncriptada=md5($contrasenia);//si el usuario existe hay que encriptar la contraseña
+     $contraseniaEncriptada=md5($password);//si el usuario existe hay que encriptar la contraseña
+     
      if($usuario['password']==$contraseniaEncriptada){
-       header("Location:felicitaciones.php");
+       header("Location:index.php");
        exit;
      }
      else{
@@ -34,6 +64,8 @@ if(file_exists($archivo)){
     $usuarioNoExisteError=true;
   }
 }
+}
+
 ?>
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
@@ -49,7 +81,7 @@ if(file_exists($archivo)){
 
    <body>
       <header>
-      <nav class="navbar navbar-expand-lg fixed-top nav-down navbar-transparent" color-on-scroll="100" id="sectionsNav">
+      <nav class="navbar navbar-expand-lg nav-down navbar-transparent" color-on-scroll="100" id="sectionsNav">
         <div class="container">
         <div class="navdar-tranlate">
             <a class="navbar-brand" href="index.php"><img src="image/tipografia.png" alt="brandlogo" height="40" width="150"></a>
@@ -66,7 +98,7 @@ if(file_exists($archivo)){
               <a class="nav-link" href="pf.php">Preguntas Frecuentes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.php">Tu cuenta<span class="sr-only">(current)</span></a></a>
+              <a class="nav-link <?= $script == 'login.php'?'bold':''?>" href="login.php">Tu cuenta<span class="sr-only">(current)</span></a></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="register.php">Registro</a>
@@ -88,7 +120,7 @@ if(file_exists($archivo)){
      <div class="container">
          <div class="row">
            <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-               <form class="form" method="" action="">
+               <form class="form" method="post" action="">
                  <div class="card card-login card-hidden">
                    <div class="card-header card-header-primary text-center">
                      <h4 class="card-title">Bienvenido</h4>
@@ -100,10 +132,10 @@ if(file_exists($archivo)){
                        <div class="input-group">
                          <div class="input-group-prepend">
                            <span class="input-group-text">
-                             <i class="material-icons">email</i>
+                             <i class="material-icons">face</i>
                            </span>
                          </div>
-                         <input type="text" class="form-control" name="username" value="" placeholder="E-mail...">
+                         <input type="text" class="form-control" name="username" value='<?php $username ?>' placeholder="Usuario...">
                        </div>
                      </span>
 
@@ -114,13 +146,13 @@ if(file_exists($archivo)){
                              <i class="material-icons">lock</i>
                            </span>
                          </div>
-                         <input type="password" class="form-control" name="password" value=""  placeholder="Contraseña...">
+                         <input type="password" class="form-control" name="password" value=""  placeholder="Contraseña..." maxlength="15">
                        </div>
                      </span>
 
                      </div>
                    <div class="card-footer justify-content-center text-center">
-                     <input type="submit"  class="btn btn-rose btn-link btn-lg" name='submit' value='Ingresa'></input>
+                     <input type="submit"  class="btn btn-rose btn-link btn-lg" name='submit' value='Ingresa'>
 
                    </div>
                    <div class="text-center text-muted pb-3"><a href="register.php" class="text-reset"> ¿No estas registrado? Crea tu cuenta acá.</a>
