@@ -1,6 +1,6 @@
 <?php
 
-$username="";
+$username="asdasd";
 $password="";
 
 $nombreVacioError = false;
