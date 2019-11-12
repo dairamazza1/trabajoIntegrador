@@ -5,6 +5,9 @@ $usuarioVacioError=false;  //usuario
 $mailInvalido=false;  //validar
 $contraseniaVaciaError=false;
 
+
+// Persistencia
+
 $password="";
 $username="";
 //ARRAY DE USUARIOS GUARDADOS
