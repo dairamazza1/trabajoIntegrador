@@ -252,10 +252,10 @@ button::-moz-focus-inner,
   border-style: none;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
+input[type=checkbox], input[type=radio] {
   box-sizing: border-box;
   padding: 0;
+  margin: 5px;
 }
 
 input[type="date"],

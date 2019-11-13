@@ -3,13 +3,16 @@
 $username="";
 $password="";
 
-$nombreVacioError = false;
+$usuarioVacioError = false;
 $contraseniaVaciaError= false;
+
 $script=basename(__FILE__);
+
 //ARRAY DE USUARIOS GUARDADOS
 $usuarios = [];
 
-if(isset($_POST["submit"])) {
+if(isset($_POST["submit"])) 
+{
   if (empty($_POST["username"])){
     $usuarioVacioError = true;
   } else {
@@ -39,31 +42,44 @@ if(isset($_POST["submit"])) {
 
 //ANALIZA EL CONTENIDO DEL REGISTER
 
-$archivo='usuarios.json';
-if(file_exists($archivo)){
-  $usuariosJson=file_get_contents($archivo);
-  $usuarios= json_decode($usuariosJson,true);
-  $usuarioExiste=false; //declaro que es falso y si existe se convierte en verdadero
+  $archivo='usuarios.json';
+  if(file_exists($archivo))
+  {
+    $usuariosJson=file_get_contents($archivo);
+    $usuarios= json_decode($usuariosJson,true);
+    $usuarioExiste=false; //declaro que es falso y si existe se convierte en verdadero
+    
 
-  foreach ($usuarios as $usuario) {//recorre el array con todos los usuarios
-    if($usuario['username']==$username){ //el nombre del usuario es igual al que paso en el formulario?.. Sino lo es, tiene que pasar al siguinte usuario
-     $usuarioExiste=true;
-     $contraseniaEncriptada=md5($password);//si el usuario existe hay que encriptar la contraseña
-     
-     if($usuario['password']==$contraseniaEncriptada){
-       header("Location:index.php");
-       exit;
-     }
-     else{
-       $contraseniaIncorrectaError=true;  //pass invalido
-       break;
-     }
-   }
-  }
-  if(!$usuarioExiste){  //si el usuario no existe...
-    $usuarioNoExisteError=true;
-  }
-}
+    foreach ($usuarios as $usuario) //recorre el array con todos los usuarios
+    {
+      if($usuario['username']==$username) //el nombre del usuario es igual al que paso en el formulario?.. Sino lo es, tiene que pasar al siguinte usuario
+      { 
+        $usuarioExiste=true;
+        $contraseniaEncriptada=md5($password);//si el usuario existe hay que encriptar la contraseña
+
+        if($usuarioExiste && $usuario['password']==$contraseniaEncriptada) //Si el usuario existe y la contraseña coincide 
+        {  
+          // LOGUEAR
+          $_SESSION["logueado"] = $_POST["usuario"];
+          if (isset($_POST["recordame"])) {  //checkbox
+            //Quiere que lo recuerde
+            setcookie("logueado", $_POST["usuario"], time() + 3600 * 2);
+          }
+          header("Location:index.php");
+        }
+    }
+    }
+    /*
+    if(!$usuarioExiste){  //si el usuario no existe...
+      $usuarioNoExisteError=true;
+    }
+    */
+
+    
+
+ }
+
+
 }
 
 ?>
@@ -127,7 +143,8 @@ if(file_exists($archivo)){
                      <!--<a class="brand"><img src="image/tipografia.png" alt="brand" height="45" width="150"></a> -->
                    </div>
                    <div class="card-body">
-                     <p class="card-description text-center">    </p>
+                     <p class="card-description text-center">  </p>
+
                      <span class="bmd-form-group">
                        <div class="input-group">
                          <div class="input-group-prepend">
@@ -150,11 +167,22 @@ if(file_exists($archivo)){
                        </div>
                      </span>
 
-                     </div>
+                     
+                    </div>
                    <div class="card-footer justify-content-center text-center">
                      <input type="submit"  class="btn btn-rose btn-link btn-lg" name='submit' value='Ingresa'>
 
                    </div>
+
+                    <div class="card-footer justify-content-center text-center">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox">
+                      <label class="form-check-label text-muted" for="recordarme">Recordarme</label>
+                    </div>
+                     
+
+                   </div>
+
                    <div class="text-center text-muted pb-3"><a href="register.php" class="text-reset"> ¿No estas registrado? Crea tu cuenta acá.</a>
                    </div>
                  </div>
