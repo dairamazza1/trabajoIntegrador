@@ -14,39 +14,9 @@
        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Nixie+One|Suranna&display=swap" rel="stylesheet">
     <title>Preguntas Frecuentes</title>
   </head>
-  <body> <header>
-     <nav class="navbar navbar-expand-lg fixed-top nav-down navbar-transparent" color-on-scroll="100" id="sectionsNav">
-       <div class="container">
-       <div class="navdar-tranlate">
-           <a class="navbar-brand" href="index.php"><img src="image/tipografia.png" alt="brandlogo" height="40" width="150"></a>
-       </div>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-         <i class="fa fa-bars"></i>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarNav">
-         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-           <li class="nav-item active">
-             <a class="nav-link" href="index.php">Inicio</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="pf.php">Preguntas Frecuentes<span class="sr-only">(current)</span></a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="login.php">Tu cuenta</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="register.php">Registro</a>
-           </li>
-           <li class="nav-item">
-             <a class="btn btn-round" href="#" target="_blank">
-             <i class="material-icons">add_shopping_cart</i>
-             </a>
-           </li>
-         </ul>
-       </div>
-       </div>
-      </nav>
-  </header>
+  <body> 
+
+  <?php include 'nav/layout.php'; ?>
 
       <div class="container-fluid">
         <div class="row">
@@ -74,6 +44,7 @@
                   </div>
                  </div>
 </div>
+<?php include 'nav/footer.php'; ?>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

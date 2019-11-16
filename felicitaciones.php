@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+<?php include 'nav/layout.php'; ?>
     felicitaciones 
+    <?php include 'nav/footer.php'; ?>
 </body>
 </html>

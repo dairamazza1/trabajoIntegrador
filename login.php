@@ -96,40 +96,8 @@ if(isset($_POST["submit"]))
    </head>
 
    <body>
-      <header>
-      <nav class="navbar navbar-expand-lg nav-down navbar-transparent" color-on-scroll="100" id="sectionsNav">
-        <div class="container">
-        <div class="navdar-tranlate">
-            <a class="navbar-brand" href="index.php"><img src="image/tipografia.png" alt="brandlogo" height="40" width="150"></a>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.php">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pf.php">Preguntas Frecuentes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <?= $script == 'login.php'?'bold':''?>" href="login.php">Tu cuenta<span class="sr-only">(current)</span></a></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="register.php">Registro</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-round" href="#" target="_blank">
-              <i class="material-icons">add_shopping_cart</i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        </div>
-       </nav>
-   </header>
-
+     
+   <?php include 'nav/layout.php'; ?>
 
    <section>
    <div class="page-header header-filter">
@@ -192,6 +160,8 @@ if(isset($_POST["submit"]))
      </div>
    </div>
    </section>
+
+
 
 
    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
