@@ -1,5 +1,91 @@
 <?php
 
+	include_once("soporte.php");
+	require_once("clases/usuario.php");
+
+	if ($auth->estaLogueado()) {
+		header("Location:inicio.php");exit;
+	}
+  //PERSISTENCIA
+  $nameDefault="";
+  $lastNameDefault="";
+	$emailDefault = "";
+	//$edadDefault = "";
+	$usernameDefault = "";
+
+	$paises = [
+		"Arg"=>"Argentina",
+		"Bol"=>"Bolivia",
+		"Bra"=>"Brasil",
+		"Chi"=>"Chile",
+		"Col"=>"Colombia",
+		"Cos"=>"Costa Rica",
+		"Cub"=>"Cuba",
+		"Ecu"=>"Ecuador",
+		"Els"=>"El Salvador",
+		"Gra"=>"Granada",
+		"Gua"=>"Guatemala",
+		"Hai"=>"Haití",
+		"Hon"=>"Honduras",
+		"Jam"=>"Jamaica",
+		"Méx"=>"México",
+		"Nic"=>"Nicaragua",
+		"Par"=>"Paraguay",
+		"Pan"=>"Panamá",
+		"Per"=>"Perú",
+		"Pue"=>"Puerto Rico",
+		"Rep"=>"República Dominicana",
+		"Sur"=>"Surinam",
+		"Uru"=>"Uruguay",
+		"Ven"=>"Venezuela"
+	];
+
+	$errores = [];
+	if(isset($_POST["submit"])) {
+    $errores = $validator->validarInformacion($_POST, $db);
+
+    //////////
+    
+   
+    //USUARIO
+    if (!isset($errores["username"])) {
+			$usernameDefault = $_POST["username"];
+    }
+    //MAIL
+		if (!isset($errores["email"])) {
+			$emailDefault = $_POST["email"];
+    }
+    //NOMBRE
+    if(!isset($errores["name"])){
+      $nameDefault= $_POST["name"]
+    }
+    //APELLIDO
+    if(!isset($errores["lastname"])){
+      $lastNameDefault= $_POST["lastname"]
+    }
+    //CONTRASENIA    preguntar
+    if (!isset($_POST["password"])){
+      $passwordDefault=$_POST["password"];
+    } 
+    //PAIS
+    //EDAD
+
+		if (count($errores) == 0) {
+      //CONSTRUCTOR DE OBJETO USUARIO -> $email, $password, $edad, $username, $pais, name, lastname, $id = null
+			$usuario = new Usuario($_POST["email"], $_POST["password"], $_POST["edad"], $_POST["username"], $_POST["pais"], $_POST["name"],$_POST["lastname"]);
+			$mail = $_POST["email"];
+
+			$usuario->guardarImagen($mail);
+			$usuario = $db->guardarUsuario($usuario);
+
+			header("Location:perfilUsuario.php?mail=$mail");exit;
+		}
+	}
+
+?>
+
+<?php
+
 
 $usuarioVacioError=false;  //usuario
 $mailInvalido=false;  //validar
@@ -14,6 +100,12 @@ $username="";
 $usuarios = [];
 $email="";
 
+$paises = [
+  "Ar" => "Argentina",
+  "Br" => "Brasil",
+  "Co" => "Colombia",
+  "Fr" => "Francia"
+];
 
 if(isset($_POST["submit"])) {
   if (empty($_POST["username"])){
@@ -98,7 +190,8 @@ if (!$usuarioVacioError && !$contraseniaVaciaError && !$mailInvalido){
                   <!--<a class="brand"><img src="image/tipografia.png" alt="brand" height="45" width="150"></a> -->
                 </div>
                 <div class="card-body">
-                  <p class="card-description text-center">Registrate</p>
+                  <p class="card-description text-center">Registrate</p>      
+
                   <span class="bmd-form-group">
                     <div class="input-group">
                       <div class="input-group-prepend">
@@ -106,12 +199,54 @@ if (!$usuarioVacioError && !$contraseniaVaciaError && !$mailInvalido){
                           <i class="material-icons">face</i>
                         </span>
                       </div>
-                      <input type="text" class="form-control" name="username" value='<?= $username ?>' placeholder="Nombre de usuario"maxlength="15">
-                      <?php if ($usuarioVacioError): ?>  <br>
-                      <span id='register_username_errorloc' class='error'>El nombre del usuario ya existe</span>
+                      <input type="text" class="form-control" name="name" value='<?= $name ?>' placeholder="Nombre"maxlength="15">
+                      <?php if ($nombreVacioError): ?>  <br>
+                      <span id='register_name_errorloc' class='error'>Complete este campo</span>
                       <?php endif ?>
                     </div>
                   </span>
+
+                  <span class="bmd-form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">face</i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" name="lastname" value='<?= $lastname ?>' placeholder="Apellido" maxlength="15">
+                      <?php if ($ApellidoVacioError): ?>  <br>
+                      <span id='register_name_errorloc' class='error'>Complete este campo</span>
+                      <?php endif ?>
+                    </div>
+                  </span>
+
+                  <span class="bmd-form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">cake</i>
+                        </span>
+                      </div>
+                      <input class="form-control" type="date" name="edad" id="edad"  placeholder="Edad" value="<?=$edadDefault?>">
+                    </div>
+                  </span>
+
+                  <div class="form-group">
+                    <label for="pais">Pais:</label>
+                    <select id="pais" class="form-control" name="pais">
+                      <?php foreach ($paises as $clave => $pais) : ?>
+                        <?php if ($clave == $_POST["pais"]) : ?>
+                          <option value="<?=$clave?>" selected>
+                            <?=$pais?>
+                          </option>
+                        <?php else: ?>
+                          <option value="<?=$clave?>">
+                            <?=$pais?>
+                          </option>
+                        <?php endif; ?>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
 
                   <span class="bmd-form-group">
                     <div class="input-group">

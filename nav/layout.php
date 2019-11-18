@@ -1,3 +1,5 @@
+<?php require_once("soporte.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,14 +24,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Ingresá</a>
+                    <a class="nav-link" href="index.php">Inicio</a>
                 </li>
                 
                 <li class="nav-item">
                     <a class="nav-link" href="pf.php">Preguntas Frecuentes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $script == 'login.php'?'bold':''?>" href="login.php">Tu cuenta<span class="sr-only">(current)</span></a></a>
+                    <a class="nav-link <?= $script == 'login.php'?'bold':''?>" href="login.php">Ingresá<span class="sr-only">(current)</span></a></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="register.php">Registro</a>

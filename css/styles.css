@@ -1,6 +1,14 @@
 body{
 
 }
+#banner{
+  font-family: 'Nixie One', cursive;
+  background-image: linear-gradient(to right,#200406,#1c1a24);
+  color: white;
+  padding-top: 0%;
+  padding-bottom: 2%;
+  z-index: 999; 
+}
 
 #nav-bar{
   font-family: 'Suranna', serif;
@@ -22,20 +30,7 @@ body{
 .navbar-toggler{
   outline: none !important;
 }
-#banner{
-  font-family: 'Nixie One', cursive;
-  background-image: linear-gradient(to right,#200406,#1c1a24);
-  color: white;
-  padding-top: 0px !important;
-    padding-bottom: 2%;
 
-}
-
-.btn-secondaryModificado{
-  color: white;
-    /* background-color: #6c757d; */
-    /* border-color: #6c757d; */
-}
 .promo-title-danez{
   font-size: 45px;
   font-family: 'Julius Sans One', sans-serif;
