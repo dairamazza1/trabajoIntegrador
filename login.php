@@ -1,5 +1,27 @@
 <?php
 
+include_once("soporte.php");
+//SESIÓN
+if ($auth->estaLogueado()) {
+  header("Location:inicio.php");exit;
+}
+
+$errores = [];
+if(isset($_POST["submit"]))  {
+  $errores = $validator->validarLogin($_POST,$db); //TRAE LOS ERRORES
+  if (count($errores) == 0) {
+    // LOGUEAR
+        $auth->loguear($_POST["email"]);
+    if (isset($_POST["recordame"])) {
+      //Quiere que lo recuerde
+      $auth->recordame($_POST["email"]);
+    }
+        header("Location:inicio.php");
+  }
+}
+
+///////////////////JSON
+/*
 $username="";
 $password="";
 
@@ -73,14 +95,9 @@ if(isset($_POST["submit"]))
     if(!$usuarioExiste){  //si el usuario no existe...
       $usuarioNoExisteError=true;
     }
-    */
-
-    
-
  }
-
-
 }
+*/
 
 ?>
  <!DOCTYPE html>
@@ -101,7 +118,7 @@ if(isset($_POST["submit"]))
 
    <section>
    <div class="page-header header-filter">
-     <div class="container">
+     <div class="container log"  style="margin-top: 25vh;">
          <div class="row">
            <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
                <form class="form" method="post" action="">
@@ -114,15 +131,16 @@ if(isset($_POST["submit"]))
                      <p class="card-description text-center">  </p>
 
                      <span class="bmd-form-group">
-                       <div class="input-group">
-                         <div class="input-group-prepend">
-                           <span class="input-group-text">
-                             <i class="material-icons">face</i>
-                           </span>
-                         </div>
-                         <input type="text" class="form-control" name="username" value='<?php $username ?>' placeholder="Usuario...">
-                       </div>
-                     </span>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">email</i>
+                        </span>
+                      </div>
+                      <input type="email" class="form-control" name="email" value='' placeholder="Correo electronico..."> <!-- ¿Se puede? Persistencia. value='<?//= $emailDefault?>' -->
+                      <span id='register_email_errorloc' class='error'></span>
+                    </div>
+                  </span>
 
                      <span class="bmd-form-group">
                        <div class="input-group">

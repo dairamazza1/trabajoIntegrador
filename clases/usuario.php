@@ -4,13 +4,13 @@ class Usuario {
 	protected $id;
 	protected $email;
 	protected $password;
-	protected $edad;
 	protected $username;
 	protected $pais;
     protected $name;
     protected $lastName;
 
-	public function __construct($email, $password, $edad, $username, $pais, $name, $lastName, $id = null) {
+    public function __construct($email, $password, $username, $pais, $name, $lastName, $id = null)
+    {
 		if ($id == null) {
 			$this->password = password_hash($password, PASSWORD_DEFAULT);
 		}
@@ -20,29 +20,28 @@ class Usuario {
 
 		$this->id = $id;
 		$this->email = $email;
-		$this->edad = $edad;
 		$this->username = $username;
         $this->pais = $pais;
         $this->name=$name;
-        $this->lastName=$lastName
+        $this->lastName=$lastName;
 	}
-
+    //GET SET NAME
     public function getName() {
 		return $this->name;
 	}
 
-	public function setId($name) {
+	public function setName($name) {
 		$this->name = $name;
     }
-
+    //GET SET LAST NAME
     public function getlastName() {
 		return $this->lastame;
 	
-
-	public function setId($lastName) {
+    }
+	public function setLastName($lastName) {
 		$this->lastName = $lastName;
-    
-    
+    }
+    //GET SET ID
 	public function getId() {
 		return $this->id;
 	}
@@ -50,7 +49,7 @@ class Usuario {
 	public function setId($id) {
 		$this->id = $id;
 	}
-
+    //GET SET EMAIL
 	public function getEmail() {
 		return $this->email;
 	}
@@ -58,7 +57,7 @@ class Usuario {
 	public function setEmail($email) {
 		$this->email = $email;
 	}
-
+    //GET SET PASS
 	public function getPassword() {
 		return $this->password;
 	}
@@ -67,13 +66,7 @@ class Usuario {
 		$this->password = $password;
 	}
 
-	public function getEdad() {
-		return $this->edad;
-	}
-
-	public function setEdad($edad) {
-		$this->edad = $edad;
-	}
+	//GET SET USERNAME
 
 	public function getUsername() {
 		return $this->username;
@@ -82,7 +75,7 @@ class Usuario {
 	public function setUsername($username) {
 		$this->username = $username;
 	}
-
+    //GET SET PAIS 
 	public function getPais() {
 		return $this->pais;
 	}

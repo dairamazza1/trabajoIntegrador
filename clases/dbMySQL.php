@@ -7,7 +7,7 @@ class DBMySQL extends DB {
 	protected $conn;
 
 	public function __construct() {  //VER REGLOG
-		$dsn = 'mysql:host=localhost;dbname=reglog;
+		$dsn = 'mysql:host=localhost;dbname=danez;
 		charset=utf8mb4;port=3306';
 		$user ="root";
 		$pass = "123456";
@@ -20,24 +20,22 @@ class DBMySQL extends DB {
 	}
 
 	function guardarUsuario(Usuario $usuario) {
-		$query = $this->conn->prepare("Insert into usuarios values(default, :email, :password,:edad,:pais,:username)");
+		$query = $this->conn->prepare("Insert into usuarios values(default, :email, :password,:edad,:pais,:username,:name,:lastName)");
 
 		$query->bindValue(":email", $usuario->getEmail());
 		$query->bindValue(":password", $usuario->getPassword());
-		$query->bindValue(":edad", $usuario->getEdad());
+		//$query->bindValue(":edad", $usuario->getEdad());
 		$query->bindValue(":pais", $usuario->getPais());
-		$query->bindValue(":username", $usuario->getUsername());
-		
+        $query->bindValue(":username", $usuario->getUsername());
+        $query->bindValue(":name", $usuario->getName());
+        $query->bindValue(":lastName", $usuario->getlastName());
 
 		$query->execute();
 
 		$id = $this->conn->lastInsertId();
 		$usuario->setId($id);
 
-		
-
 		return $usuario;
-
 	}
 
 	function traerTodos() {
@@ -49,7 +47,7 @@ class DBMySQL extends DB {
 		$usuariosFormatoClase = [];
 
 		foreach ($usuariosFormatoArray as $usuario) {
-			$usuariosFormatoClase[] = new Usuario($usuario["email"], $usuario["password"], $usuario["edad"], $usuario["username"], $usuario["pais"], $usuario["id"]);
+			$usuariosFormatoClase[] = new Usuario($usuario["email"], $usuario["password"], $usuario["username"], $usuario["pais"], $usuario["name"], $usuario["lastName"], $usuario["id"]); //$email, $password, $username, $pais, $name, $lastName, $id = null)
 		}
 
 		return $usuariosFormatoClase;
@@ -64,7 +62,7 @@ class DBMySQL extends DB {
 		$usuarioFormatoArray = $query->fetch();
 
 		if ($usuarioFormatoArray) {
-			$usuario = new Usuario($usuarioFormatoArray["email"], $usuarioFormatoArray["password"], $usuarioFormatoArray["edad"], $usuarioFormatoArray["username"], $usuarioFormatoArray["pais"], $usuarioFormatoArray["id"]);
+			$usuario = new Usuario($usuarioFormatoArray["email"], $usuarioFormatoArray["password"], $usuarioFormatoArray["username"], $usuarioFormatoArray["pais"], $usuarioFormatoArray["name"], $usuarioFormatoArray["lastName"], $usuarioFormatoArray["id"]);
 			return $usuario;
 		} else {
 			return NULL;

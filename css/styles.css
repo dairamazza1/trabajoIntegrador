@@ -1,6 +1,4 @@
-body{
 
-}
 #banner{
   font-family: 'Nixie One', cursive;
   background-image: linear-gradient(to right,#200406,#1c1a24);
@@ -9,6 +7,12 @@ body{
   padding-bottom: 2%;
   z-index: 999; 
 }
+
+/*.container .reg {
+  padding-top: 80px !important;
+  margin-top: 80px !important;
+}
+*/
 
 #nav-bar{
   font-family: 'Suranna', serif;
@@ -96,9 +100,13 @@ a:-webkit-any-link {
 a:not([href]):not([tabindex]){
   color: white;
 }
-.ml-auto, .mx-auto {
-    margin-top: 170px;
+/*.ml-auto, .mx-auto {
+    margin-top: 80px;
 }
+*/
+.card{position: relative;
+}
+
 .card-title {
     color: white;
 }
