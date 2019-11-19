@@ -6,7 +6,7 @@ require_once("usuario.php");
 class DBMySQL extends DB {
 	protected $conn;
 
-	public function __construct() {  //VER REGLOG
+	public function __construct() {  
 		$dsn = 'mysql:host=localhost;dbname=danez;
 		charset=utf8mb4;port=3306';
 		$user ="root";

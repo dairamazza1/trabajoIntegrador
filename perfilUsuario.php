@@ -1,7 +1,7 @@
 <?php
   include("soporte.php");
   if (!$auth->estaLogueado()) {  //Si el usuario no está logueado...
-    header("Location:inicio.php");exit;
+    header("Location:login.php");exit;
   }
 
   $usuarioLogueado = $auth->usuarioLogueado($db);

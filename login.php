@@ -16,7 +16,7 @@ if(isset($_POST["submit"]))  {
       //Quiere que lo recuerde
       $auth->recordame($_POST["email"]);
     }
-        header("Location:inicio.php");
+        header("Location:index.php");
   }
 }
 

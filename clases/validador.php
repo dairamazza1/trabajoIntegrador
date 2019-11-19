@@ -34,7 +34,7 @@ class Validator {
 		return $errores;
 	}
 
-	function validarInformacion($informacion, DB $db) {
+	function validarInformacion($informacion, DB $db) {  // REGISTER
 		$errores = [];
 
 		foreach ($informacion as $clave => $valor) {
@@ -42,14 +42,14 @@ class Validator {
 		}
 
 		if (empty($informacion["username"])) {
-			$errores["username"] = "Este campo no puede estar vacío";
+			$errores["username"] = "El nombre de Usuario no debe esta vacío" ;
         }
         if (empty($informacion["lastName"])) {
-                $errores["lastName"] = "Este campo no puede estar vacío";
+                $errores["lastName"] =  "El campo Apellido no debe esta vacío";
         }
 
         if (empty($informacion["name"])) {
-            $errores["name"] = "Este campo no puede estar vacío";
+            $errores["name"] =  "El campo Nombre no debe esta vacío";
     }
 
         /*
@@ -69,10 +69,9 @@ class Validator {
 		if ($informacion["password"] == "") {
 			$errores["password"] = "Completar contraseña";
         }
-        
-        if($informacion["edad"] < 18){
-            $errores["edad"] = "Debes ser mayor a 18 años";
-        }
+		// if ($informacion["pais"] == $paises["Pai"] ) {
+		// 	$errores["pais"] = "Debe seleccionar un páis válido";
+		// }
 
     return $errores;
 	}

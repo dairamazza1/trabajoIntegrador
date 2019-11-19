@@ -4,7 +4,7 @@
 	require_once("clases/usuario.php");
 
 	if ($auth->estaLogueado()) {
-		header("Location:inicio.php");exit;
+		header("Location:login.php");exit;
 	}
   //PERSISTENCIA
   $nameDefault="";
@@ -14,7 +14,7 @@
 	$usernameDefault = "";
 
 	$paises = [
-    "Pai" =>"País",
+    "Pai" =>"Seleccione un país",
 		"Arg"=>"Argentina",
 		"Bol"=>"Bolivia",
 		"Bra"=>"Brasil",
@@ -67,7 +67,7 @@
       $passwordDefault=$_POST["password"];
     } 
     //PAIS
-    //EDAD
+    
 
 		if (count($errores) == 0) {
       //CONSTRUCTOR DE OBJETO USUARIO -> $email, $password, $edad, $username, $pais, name, lastname, $id = null
@@ -161,9 +161,6 @@ f
 ?>
 
 
-
-
- ?>
 <!DOCTYPE html>
  <html lang="en" dir="ltr">
    <head>
@@ -223,7 +220,7 @@ f
                           <i class="material-icons">face</i>
                         </span>
                       </div>
-                      <input type="text" class="form-control" name="lastname" value='<?= $lastNameDefault ?>' placeholder="Apellido" maxlength="15">
+                      <input type="text" class="form-control" name="lastName" value='<?= $lastNameDefault ?>' placeholder="Apellido" maxlength="15">
                       <?php //if ($ApellidoVacioError): ?>  <br>
                       <!--<span id='register_name_errorloc' class='error'>Complete este campo</span>-->
                       <?php //endif ?>
